@@ -1,10 +1,10 @@
 {
-  "name": "vikas",
-  "age": 23,
+  "name": "name",
+  "age": 50,
   "address": {
-    "vill": "manota",
-    "tehsil": "nagar",
-    "dis": "bharatpur",
-    "pin": 321205
+    "vill": "village",
+    "tehsil": "tehsil",
+    "dis": "District",
+    "pin": 780968
   }
 }
