@@ -2,6 +2,7 @@ package com.devik;
 
 import antlr.JsonLexer;
 import antlr.JsonParser;
+import json.JsonArray;
 import json.JsonObject;
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CharStream;
@@ -23,14 +24,24 @@ public class Main {
                     "tehsil": "tehsil",
                     "dis": "District",
                     "pin": 780968
-                  }
+                  },
+                  "subjects":["english",  "hindi"]
                 }
                 """;
-        JsonObject obj=JsonObject.getFromString(json_string);
-//        System.out.println(obj);
+//        JsonObject obj=JsonObject.getFromString(json_string);
+        JsonObject obj=new JsonObject("test.Json");
         System.out.println(obj);
         System.out.println(obj.getObject("address"));
         System.out.println(obj.getNumber("age"));
-        System.out.println(obj.getBoolean("married"));
+        System.out.println(obj.getJsonArray("subjects"));
+        System.out.println("_________________________________________________________________________________");
+
+
+        String json_array= """
+                ["english","hindi","urdu"]
+                """;
+
+        JsonArray arr=JsonArray.getFromString(json_array);
+        System.out.println(arr.get(0));
     }
 }

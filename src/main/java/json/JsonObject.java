@@ -14,7 +14,7 @@ public class JsonObject {
 
     private final Map<String, Object> map;
 
-    private JsonObject(JsonParser.ObjectContext ctx) {
+    public JsonObject(JsonParser.ObjectContext ctx) {
         map = ctx.pair().stream().collect(Collectors.toMap(pairContext -> {
             String key = pairContext.key().getText();
             return key.substring(1, key.length() - 1);
@@ -65,10 +65,7 @@ public class JsonObject {
     public JsonArray getJsonArray(String key){
         if (map.get(key) == null)
             return null;
-        else if (JsonParser.ArrayContext.class.isInstance(map.get(key)))
-            return new JsonArray((JsonParser.ArrayContext)map.get(key));
-        else
-            throw new InvalidCastException("looking for Number but found other type object.");
+        return JsonArray.getFromString(((JsonParser.ValueContext)map.get(key)).getText());
     }
 
     public boolean add(String key, Object obj) {
@@ -97,7 +94,7 @@ public class JsonObject {
                 return "\""+entry.getKey()+"\":"+new JsonObject((JsonParser.ObjectContext)entry.getValue()).toString();
             else if(JsonParser.ArrayContext.class.isInstance(entry.getValue()))
                 return "\""+entry.getKey()+"\":"+new JsonArray((JsonParser.ArrayContext)entry.getValue()).toString();
-            return ""+entry.getKey()+"\":"+((JsonParser.ValueContext)entry.getValue()).getText();
+            return "\""+entry.getKey()+"\":"+((JsonParser.ValueContext)entry.getValue()).getText();
         }).collect(Collectors.joining(",", "{", "}"));
 
     }
