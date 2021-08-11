@@ -37,11 +37,11 @@ public class Main {
         System.out.println("_________________________________________________________________________________");
 
 
-        String json_array= """
-                ["english","hindi","urdu"]
-                """;
-
-        JsonArray arr=JsonArray.getFromString(json_array);
-        System.out.println(arr.get(0));
+//        String json_array= """
+//                ["english","hindi","urdu"]
+//                """;
+//
+//        JsonArray arr=JsonArray.getFromString(json_array);
+//        System.out.println(arr.get(0));
     }
 }
