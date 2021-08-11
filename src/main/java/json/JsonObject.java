@@ -47,28 +47,19 @@ public class JsonObject {
     public JsonObject getObject(String key) {
         if (map.get(key) == null)
             return null;
-        else if (JsonParser.ObjectContext.class.isInstance(map.get(key)))
-            return new JsonObject((JsonParser.ObjectContext) map.get(key));
-        else
-            throw new InvalidCastException("looking for JsonObject but found other type object.");
+        return JsonObject.getFromString(((JsonParser.ValueContext)map.get(key)).getText());
     }
 
     public Number getNumber(String key) {
         if (map.get(key) == null)
             return null;
-        else if (Number.class.isInstance(map.get(key)))
-            return (Number) map.get(key);
-        else
-            throw new InvalidCastException("looking for Number but found other type object.");
+        return Double.parseDouble(((JsonParser.ValueContext)map.get(key)).getText());
     }
 
     public Boolean getBoolean(String key) {
         if (map.get(key) == null)
             return null;
-        else if (Boolean.class.isInstance(map.get(key)))
-            return Boolean.getBoolean(String.valueOf(map.get(key)));
-        else
-            throw new InvalidCastException("looking for Number but found other type object.");
+        return Boolean.parseBoolean(((JsonParser.ValueContext)map.get(key)).getText());
     }
 
     public JsonArray getJsonArray(String key){

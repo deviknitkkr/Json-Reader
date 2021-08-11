@@ -1,6 +1,7 @@
 {
   "name": "name",
   "age": 50,
+  "married": false,
   "address": {
     "vill": "village",
     "tehsil": "tehsil",

@@ -17,6 +17,7 @@ public class Main {
                 {
                   "name": "name",
                   "age": 50,
+                  "married": false,
                   "address": {
                     "vill": "village",
                     "tehsil": "tehsil",
@@ -29,5 +30,7 @@ public class Main {
 //        System.out.println(obj);
         System.out.println(obj);
         System.out.println(obj.getObject("address"));
+        System.out.println(obj.getNumber("age"));
+        System.out.println(obj.getBoolean("married"));
     }
 }
