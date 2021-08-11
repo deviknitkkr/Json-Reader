@@ -14,20 +14,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        String json_string= """
-                {
-                  "name": "name",
-                  "age": 50,
-                  "married": false,
-                  "address": {
-                    "vill": "village",
-                    "tehsil": "tehsil",
-                    "dis": "District",
-                    "pin": 780968
-                  },
-                  "subjects":["english",  "hindi"]
-                }
-                """;
+//        String json_string= """
+//                {
+//                  "name": "name",
+//                  "age": 50,
+//                  "married": false,
+//                  "address": {
+//                    "vill": "village",
+//                    "tehsil": "tehsil",
+//                    "dis": "District",
+//                    "pin": 780968
+//                  },
+//                  "subjects":["english",  "hindi"]
+//                }
+//                """;
 //        JsonObject obj=JsonObject.getFromString(json_string);
         JsonObject obj=new JsonObject("test.Json");
         System.out.println(obj);
