@@ -5,6 +5,8 @@ import json.core.InvalidCastException;
 import json.core.JsonParserTree;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -36,7 +38,7 @@ public class JsonObject {
         if (value == null)
             return null;
         else if (JsonParser.ValueContext.class.isInstance(value)) {
-            String str = String.valueOf(value);
+            String str =((JsonParser.ValueContext)value).getText();
             return str.substring(1, str.length() - 1);
         } else
             throw new InvalidCastException("looking for Number but found other type object.");
@@ -97,6 +99,15 @@ public class JsonObject {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        return map.entrySet().stream().map(x -> "\"" + x.getKey() + "\":" + x.getValue().toString()).collect(Collectors.joining(",", "{", "}"));
+        return map.entrySet().stream().map(entry->{
+            if(String.class.isInstance(entry.getValue()))
+                return "\""+entry.getKey()+"\":\""+((JsonParser.ValueContext)entry.getValue()).getText()+"\"";
+            else if(JsonParser.ObjectContext.class.isInstance(entry.getValue()))
+                return "\""+entry.getKey()+"\":"+new JsonObject((JsonParser.ObjectContext)entry.getValue()).toString();
+            else if(JsonParser.ArrayContext.class.isInstance(entry.getValue()))
+                return "\""+entry.getKey()+"\":"+new JsonArray((JsonParser.ArrayContext)entry.getValue()).toString();
+            return ""+entry.getKey()+"\":"+((JsonParser.ValueContext)entry.getValue()).getText();
+        }).collect(Collectors.joining(",", "{", "}"));
+
     }
 }
